@@ -6,5 +6,12 @@ The platform used is a virtual linux machine.
 
 
 
-Projects done so far:
-1. A program in C that sorts a text file in a lexicographical fashion
+## Projects done so far:
+#### 1. A program in C that sorts a text file in a lexicographical fashion
+
+## Projects in progress
+#### A program that allows users to modify the classes at a University
+- [ ] add "add," and "remove" functionalities
+- [ ] get user search to work
+- [ ] update Makefile to properly link and compile data
+- [ ] get code working

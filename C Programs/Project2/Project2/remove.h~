@@ -1,0 +1,1 @@
+void remove(int *department_count, class_info_t class_array[])

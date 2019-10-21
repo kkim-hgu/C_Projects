@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<string.h>
 
-char *read_file(char *argv[], class_info_t *class_array[])
+void read_file(char *argv[], class_info_t *class_array[], char *class_count)
 {
   //open file
   FILE *f = NULL;
@@ -19,11 +19,19 @@ char *read_file(char *argv[], class_info_t *class_array[])
   char delim[2] = ":";
   char lines[MAX_LINE];
   fgets(lines, MAX_LINE, f);
-  char *token = strtok(lines, delim);
-  char *class_count = token;
-  int department_count = atoi(token);
+  char array_size[MAX_CLASSES];
+  strcpy(array_size, strtok(lines, delim));
   
-  int i;;
+  //get info on array size for class_array
+  int i;
+  for(i = 0; i < MAX_CLASSES; i++)
+    {
+      *(class_count + i) = array_size[i];
+    }
+  int department_count = atoi(class_count);
+
+  //read the file data into class_array
+  char *token = NULL;
   for(i = 0; i < department_count && (fgets(lines, MAX_LINE, f)) != NULL; i++)
     {
       class_array[i] = (class_info_t *) malloc(sizeof(class_info_t));
@@ -39,29 +47,28 @@ char *read_file(char *argv[], class_info_t *class_array[])
 		}
 	    }
 	}
-					       //class_array[i] = (temp + i);
     }
+  //close reading file
   fclose(f);
-  return class_count;
 }
-//TODO make into function
 
-void save_file(char *argv[], char * class_count, class_info_t *class_array[])
+void save_file(char *argv[], char *class_count, class_info_t *class_array[])
 {
+  //open file to write
   char *filename = argv[1];
   FILE *f = fopen(filename, "w");
   int department_count = atoi(class_count);
   int i;
-  //char *class_count = itoa(department_count,str , 10);
+  fputs(class_count, f);
+  fputs("\n", f);
+  //insert data into file
   for(i = 0; i < department_count; i++)
     {
-      //TODO fix into string first argument 
-      fputs(class_count, f);
       fputs(class_array[i]->department, f);
       fputs(":", f);
       fputs(class_array [i]->number, f);
       fputs(":", f);
       fputs(class_array[i]->location, f);
-      fputs("\n", f);
+      free(class_array[i]); //free data after being inserted
     }
 }

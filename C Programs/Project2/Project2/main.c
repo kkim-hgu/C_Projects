@@ -6,19 +6,19 @@
 #include<string.h>
 
 #include"file_operations.h"
+#include"add.h"
+#include "remove.h"
 
 int main(int argc, char *argv[])
 {
   //gather filename from user with argv
-  //open the file
   class_info_t *class_array[MAX_CLASSES];
-  char *class_count = read_file(argv, class_array);
-
-  //prompt user:
+  char class_count[MAX_CLASSES];
+  read_file(argv, class_array, class_count);
   int department_count = atoi(class_count);
-  printf("%d", department_count);
   int done = 0;
   int i;
+  //prompt user
   while(!done)
     {
       printf("input option: ");
@@ -36,10 +36,15 @@ int main(int argc, char *argv[])
 	}
 
       //option 2: add
-      //add(&department_count);
-
+      if(strcmp(option, "add") == 0)
+	{
+	  add(&department_count, class_array, class_count);
+	}
       //option 3: remove
-      
+      if(strcmp(option, "remove") == 0)
+	{
+	  remove_class(&department_count, class_array, class_count);
+	}
       
       //option 4: exit
       if(strcmp(option, "exit") == 0)

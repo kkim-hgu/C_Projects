@@ -19,11 +19,15 @@ char *read_file(char *argv[], class_info_t *class_array[])
   char delim[2] = ":";
   char lines[MAX_LINE];
   fgets(lines, MAX_LINE, f);
-  char *token = strtok(lines, delim);
-  char *class_count = token;
-  int department_count = atoi(token);
+  char *class_count = strtok(lines, delim);
+  char count_class[MAX_COURSE_LOCATION_LENGTH];
+  strcpy(count_class, class_count);
+  char *actual_class_count = count_class;
+  // printf(" %s ", class_count);
+  int department_count = atoi(class_count);
   
   int i;
+  char *token = NULL;
   for(i = 0; i < department_count && (fgets(lines, MAX_LINE, f)) != NULL; i++)
     {
       class_array[i] = (class_info_t *) malloc(sizeof(class_info_t));
@@ -41,7 +45,8 @@ char *read_file(char *argv[], class_info_t *class_array[])
 	}
     }
   fclose(f);
-  return class_count;
+  printf(" %s ", class_count);
+  return actual_class_count;
 }
 
 void save_file(char *argv[], char * class_count, class_info_t *class_array[])

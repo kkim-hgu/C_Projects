@@ -8,5 +8,5 @@ The platform used is a virtual linux machine.
 
 ## Projects done so far:
 #### 1. A program in C that sorts a text file in a lexicographical fashion
-#### A program that allows users to modify the classes at a University
+#### 2. A program that allows users to modify the classes at a University
 ## Projects in progress
